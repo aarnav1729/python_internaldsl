@@ -41,31 +41,83 @@ class SpecificationTestFramework:
 
 #Define the main function       
 if __name__ == "__main__":
-
-    # Define test cases for core data and functionality
+    
     def test_addition():
-
         # Test addition of two numbers
         Expectation(2 + 2).to(lambda x: x == 4)
 
-    def test_string_length():
+    def test_subtraction():
+        # Test subtraction of two numbers
+        Expectation(5 - 3).to(lambda x: x == 2)
 
+    def test_multiplication():
+        # Test multiplication of two numbers
+        Expectation(2 * 3).to(lambda x: x == 6)
+
+    def test_division():
+        # Test division of two numbers
+        Expectation(6 / 3).to(lambda x: x == 2)
+
+    def test_modulo():
+        # Test modulo of two numbers
+        Expectation(5 % 2).to(lambda x: x == 1)
+
+    def test_exponentiation():
+        # Test exponentiation of two numbers
+        Expectation(2 ** 3).to(lambda x: x == 8)
+
+    def test_float_addition():
+        # Test addition of two floating-point numbers
+        Expectation(2.5 + 3.7).to(lambda x: x == 6.2)
+
+    def test_float_subtraction():
+        # Test subtraction of two floating-point numbers
+        Expectation(5.5 - 3.3).to(lambda x: x == 2.2)
+
+    def test_float_multiplication():
+        # Test multiplication of two floating-point numbers
+        Expectation(2.5 * 3.7).to(lambda x: x == 9.25)
+
+    def test_float_division():
+        # Test division of two floating-point numbers
+        Expectation(6.2 / 3.1).to(lambda x: x == 2.0)
+
+    def test_float_modulo():
+        # Test modulo of two floating-point numbers
+        Expectation(5.5 % 2.5).to(lambda x: x == 0.5)
+
+    def test_float_exponentiation():
+        # Test exponentiation of two floating-point numbers
+        Expectation(2.0 ** 0.5).to(lambda x: x == 1.4142135623730951)
+
+    def test_string_length():
         # Test length of a string
         Expectation(len("Hello, World!")).to(lambda x: x == 13)
 
+    def test_list_concatenation():
+        # Test list concatenation
+        Expectation([1, 2] + [3, 4]).to(lambda x: x == [1, 2, 3, 4])
 
-    # Define test cases for user-defined classes, functions, and modules
+    def test_string_concatenation():
+        s1 = "Hello"
+        s2 = "World"
+        # Test string concatenation
+        Expectation(s1 + ", " + s2).to(lambda x: x == "Hello, World")
+
+    def test_list_comprehension():
+        numbers = [1, 2, 3, 4, 5]
+        squared_numbers = [x**2 for x in numbers]
+        Expectation(squared_numbers).to(lambda x: x == [1, 4, 9, 16, 25])
+
     def test_user_defined_function():
 
         # Implement a user-defined function and test it
         def square(x):
             return x ** 2
-
         # Test the square function
         Expectation(square(5)).to(lambda x: x == 25)
 
     def test_user_defined_class():
-        
         # Implement a simple user-defined class and test it
         class MyClass:
 
@@ -86,6 +138,7 @@ if __name__ == "__main__":
     def test_if_statement():
         value = 10
         if value > 5:
+            # Test if the value is greater than 5
             Expectation(value).to(lambda x: x > 5)
 
     # Test loops - for loop
@@ -93,9 +146,10 @@ if __name__ == "__main__":
         total = 0
         for i in range(1, 6):
             total += i
+            # Test the total
         Expectation(total).to(lambda x: x == 15)
 
-    # Test lists - basic data structure
+    # Test lists
     def test_list_operations():
         my_list = [1, 2, 3, 4, 5]
 
@@ -105,11 +159,11 @@ if __name__ == "__main__":
         # Test list element access
         Expectation(my_list[2]).to(lambda x: x == 3)
 
-        # Test list modification
         my_list.append(6)
+        # Test list modification
         Expectation(my_list[-1]).to(lambda x: x == 6)
 
-    # Test dictionaries - another data structure
+    # Test dictionaries
     def test_dictionary_operations():
         my_dict = {'apple': 3, 'banana': 2, 'cherry': 5}
         # Test dictionary length
@@ -118,11 +172,39 @@ if __name__ == "__main__":
         # Test dictionary element access
         Expectation(my_dict['banana']).to(lambda x: x == 2)
 
-        # Test dictionary modification
         my_dict['date'] = 1
+        # Test dictionary modification
         Expectation(my_dict['date']).to(lambda x: x == 1)
 
-    # Test exception handling
+    def test_dictionary_merging():
+        dict1 = {'a': 1, 'b': 2}
+        dict2 = {'b': 3, 'c': 4}
+        # Test dictionary merging
+        Expectation({**dict1, **dict2}).to(lambda x: x == {'a': 1, 'b': 3, 'c': 4})
+
+    def test_tuple_unpacking():
+        a, b = (1, 2)
+        # Test tuple unpacking
+        Expectation((a, b)).to(lambda x: x == (1, 2))
+
+    def test_bool():
+        # Test a boolean value
+        Expectation(True).to(lambda x: x is True)
+
+    def test_boolean_operations():
+        a = True
+        b = False
+
+        # Test logical AND operation
+        Expectation(a and b).to(lambda x: x is False)
+
+        # Test logical OR operation
+        Expectation(a or b).to(lambda x: x is True)
+
+        # Test logical NOT operation
+        Expectation(not b).to(lambda x: x is True)
+
+
     def test_exception_handling():
         def divide(x, y):
             try:
@@ -130,11 +212,10 @@ if __name__ == "__main__":
                 return result
             except ZeroDivisionError:
                 return "Cannot divide by zero"
-        
+        # Test exception handling
         Expectation(divide(10, 2)).to(lambda x: x == 5)
         Expectation(divide(5, 0)).to(lambda x: x == "Cannot divide by zero")
 
-    # Test object-oriented concepts
     class Animal:
         def __init__(self, name):
             self.name = name
@@ -151,47 +232,64 @@ if __name__ == "__main__":
         my_dog = Dog("Buddy")
         my_cat = Cat("Whiskers")
 
+        # Test object-oriented concepts
         Expectation(my_dog.name).to(lambda x: x == "Buddy")
         Expectation(my_cat.name).to(lambda x: x == "Whiskers")
         Expectation(my_dog.bark()).to(lambda x: x == "Woof!")
         Expectation(my_cat.meow()).to(lambda x: x == "Meow!")
 
-    # Test recursion
     def test_factorial():
         def factorial(n):
             if n == 0:
                 return 1
             else:
                 return n * factorial(n-1)
-        
+        # Test factorial (recursion)      
         Expectation(factorial(5)).to(lambda x: x == 120)
 
-    # Step 5: Develop the Testing Framework
+    # Develop the Testing Framework
     test_subject = {
-        # Core data and functionality
         "Addition Test": test_addition,
-
-        # User-defined classes, functions, and modules
+        "Subtraction Test": test_subtraction,
+        "Multiplication Test": test_multiplication,
+        "Division Test": test_division,
+        "Modulo Test": test_modulo,
+        "Exponentiation Test": test_exponentiation,
+        "Float Addition Test": test_float_addition,
+        "Float Subtraction Test": test_float_subtraction,
+        "Float Multiplication Test": test_float_multiplication,
+        "Float Division Test": test_float_division,
+        "Float Modulo Test": test_float_modulo,
+        "Float Exponentiation Test": test_float_exponentiation,
+        "List Concatenation Test": test_list_concatenation,
+        "List Comprehension Test": test_list_comprehension,
+        "String Concatenation Test": test_string_concatenation,
         "String Length Test": test_string_length,
         "User-Defined Function Test": test_user_defined_function,
         "User-Defined Class Test": test_user_defined_class,
-
-        # Control flow, loops, and data structures
         "Control Flow Test": test_if_statement,
         "For Loop Test": test_for_loop,
         "List Operations Test": test_list_operations,
         "Dictionary Operations Test": test_dictionary_operations,
-
-        # Exception handling
+        "Dictionary Merging Test": test_dictionary_merging,
+        "Tuple Unpacking Test": test_tuple_unpacking,
         "Exception Handling Test": test_exception_handling,
-
-        # Object-oriented concepts
         "Object-Oriented Concepts Test": test_object_oriented_concepts,
-
-        # Recursion
         "Factorial Test": test_factorial,
+        "Boolean Test": test_bool,
+        "Boolean Operations Test": test_boolean_operations,
     }
 
-    # Step 6: Run the Testing Framework
+    import test_module
+
+    def test_user_defined_module():
+        # Test a function or class from the imported module
+        result = test_module.my_function()
+        Expectation(result).to(lambda x: x == "Testing my_function!")
+
+    # Add the user-defined module test to the test_subject
+    test_subject["User-Defined Module Test"] = test_user_defined_module
+
+    # Run the Testing Framework
     test_framework = SpecificationTestFramework()
     test_framework.run(test_subject)
