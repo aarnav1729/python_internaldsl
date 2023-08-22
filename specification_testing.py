@@ -11,6 +11,20 @@ class Expectation:
         if not condition(self.value):
             # Raise an AssertionError if the condition is not met
             raise AssertionError(f"Expected {self.value} to {condition.__name__}, but it didn't.")
+        
+    def in_range(self, start, end):
+        if not (start <= self.value <= end):
+            raise AssertionError(f"Expected {self.value} to be in range [{start}, {end}], but it wasn't.")
+
+    def to_be_in(self, iterable):
+        if self.value not in iterable:
+            raise AssertionError(f"Expected {self.value} to be in {iterable}, but it wasn't.")
+
+    def not_to_raise(self, exception_type):
+        try:
+            self.value()
+        except exception_type:
+            raise AssertionError(f"Expected no {exception_type.__name__} to be raised, but it was.")
 
 #Define the SpecificationTestFramework class
 class SpecificationTestFramework:
@@ -163,6 +177,17 @@ if __name__ == "__main__":
         # Test list modification
         Expectation(my_list[-1]).to(lambda x: x == 6)
 
+    def test_list_sorting_and_searching():
+        my_list = [3, 1, 4, 1, 5, 9, 2, 6, 5, 3, 5]
+
+        # Test sorting the list
+        my_list.sort()
+        Expectation(my_list).to(lambda x: x == [1, 1, 2, 3, 3, 4, 5, 5, 5, 6, 9])
+
+        # Test searching for an element in the list
+        Expectation(6 in my_list).to(lambda x: x is True)
+        Expectation(7 in my_list).to(lambda x: x is False)
+
     # Test dictionaries
     def test_dictionary_operations():
         my_dict = {'apple': 3, 'banana': 2, 'cherry': 5}
@@ -187,6 +212,12 @@ if __name__ == "__main__":
         # Test tuple unpacking
         Expectation((a, b)).to(lambda x: x == (1, 2))
 
+    def test_tuple_concatenation():
+        my_tuple = (1, 2, 3)
+
+        # Test tuple concatenation
+        Expectation(my_tuple + (4, 5)).to(lambda x: x == (1, 2, 3, 4, 5))
+
     def test_bool():
         # Test a boolean value
         Expectation(True).to(lambda x: x is True)
@@ -203,6 +234,44 @@ if __name__ == "__main__":
 
         # Test logical NOT operation
         Expectation(not b).to(lambda x: x is True)
+
+    def test_set_operations():
+        set1 = {1, 2, 3}
+        set2 = {3, 4, 5}
+
+        # Test set union
+        Expectation(set1 | set2).to(lambda x: x == {1, 2, 3, 4, 5})
+
+        # Test set intersection
+        Expectation(set1 & set2).to(lambda x: x == {3})
+
+        # Test set difference
+        Expectation(set1 - set2).to(lambda x: x == {1, 2})
+
+        # Test set symmetric difference
+        Expectation(set1 ^ set2).to(lambda x: x == {1, 2, 4, 5})
+
+    from enum import Enum
+
+    class Color(Enum):
+        RED = 1
+        GREEN = 2
+        BLUE = 3
+
+    def test_enum():
+        color = Color.RED
+
+        # Test the enumeration value
+        Expectation(color).to(lambda x: x == Color.RED)
+
+    def test_range_type():
+        r = range(5)
+
+        # Test if 3 is in the range
+        Expectation(3 in r).to(lambda x: x is True)
+
+        # Test the length of the range
+        Expectation(len(r)).to(lambda x: x == 5)
 
 
     def test_exception_handling():
@@ -270,14 +339,19 @@ if __name__ == "__main__":
         "Control Flow Test": test_if_statement,
         "For Loop Test": test_for_loop,
         "List Operations Test": test_list_operations,
+        "List Sorting and Searching Test": test_list_sorting_and_searching,
         "Dictionary Operations Test": test_dictionary_operations,
         "Dictionary Merging Test": test_dictionary_merging,
         "Tuple Unpacking Test": test_tuple_unpacking,
+        "Tuple Concatenation Test": test_tuple_concatenation,
         "Exception Handling Test": test_exception_handling,
         "Object-Oriented Concepts Test": test_object_oriented_concepts,
         "Factorial Test": test_factorial,
         "Boolean Test": test_bool,
         "Boolean Operations Test": test_boolean_operations,
+        "Set Operations Test": test_set_operations,
+        "Enum Test": test_enum,
+        "Range Type Test": test_range_type,
     }
 
     import test_module
