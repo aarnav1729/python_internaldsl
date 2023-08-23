@@ -33,7 +33,7 @@ In this project, we have included test cases covering various language construct
 - Object-oriented concepts tests.
 
 ## Project Structure
-SpecificationTestingFramework/
+test/
 │
 ├── venv/
 │
@@ -45,6 +45,6 @@ SpecificationTestingFramework/
 The code is documented using comments for clarity and explanation of important sections. Please refer to the comments in the `specification_testing.py` file for more details.
 
 ## Author
-Aarnav Singh
-CSC330 Language Design and Implementation
-Summer 2023
+Aarnav Singh,
+CSC330 Language Design and Implementation,
+Summer 2023.
