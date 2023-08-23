@@ -33,13 +33,8 @@ In this project, we have included test cases covering various language construct
 - Object-oriented concepts tests.
 
 ## Project Structure
-test/
-│
-├── venv/
-│
-├── README.md
-│
-└── specification_testing.py
+![Screenshot 4](https://github.com/aarnav1729/python_internaldsl/assets/72580375/57bfb431-6e36-4ba6-b0d2-8230bec36f3d)
+
 
 ## Documentation
 The code is documented using comments for clarity and explanation of important sections. Please refer to the comments in the `specification_testing.py` file for more details.
