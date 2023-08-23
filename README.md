@@ -1,6 +1,9 @@
 # Specification Testing Framework
 This is a Specification Testing Framework for Python, designed to showcase understanding of language constructs and create a readable DSL for testing code behavior created for the final project of CSC330.
 
+## Demo
+![vscode integrated terminal result screenshot](https://github.com/aarnav1729/python_internaldsl/assets/72580375/b9e5db0d-7f8d-475c-b7ec-5ae4e3c19f97)
+
 ## Installation
 1. Clone this repository:
    git clone https://github.com/aarnav1729/python_internaldsl.git
